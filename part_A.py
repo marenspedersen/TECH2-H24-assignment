@@ -23,28 +23,29 @@ def std_loops(x):
     if len(x) == 0:
         raise ValueError("Cannot compute standard deviation of an empty sequence.")
 
-    # Step 1: Initialize variables
+    # Initialize variables
     n = len(x)
-    mean = 0.0
-    variance_sum = 0.0
+    mean = 0
+    variance_sum = 0
 
-    # Step 2: Calculate the mean using a loop
+    # Calculating the mean
     for num in x:
         mean += num
     mean /= n
 
-    # Step 3: Calculate the sum of squared differences from the mean
+    # Calculating the sum of squared differences from the mean
     for num in x:
         variance_sum += (num - mean) ** 2
 
-    # Step 4: Calculate the variance (population)
+    # Calculating the variance
     variance = variance_sum / n
 
-    # Step 5: Calculate the standard deviation
+    # Calculateing the standard deviation
     sd = variance ** 0.5
     return sd
+  
 
-def std_builtin(x):
+def std_builtin(x, sample=False):
     """
     Compute standard deviation of x using the built-in functions sum()
     and len().
@@ -60,35 +61,32 @@ def std_builtin(x):
     """
 
     from math import sqrt
+    
+    N = len(x)
 
-    N = len(values)
+    # Calculating the mean
+    meanVal = sum(x) / N
 
-    # Calculate the mean
-    meanVal = sum(values) / N
+    # Calculating the sum of squares
+    S = sum(num**2 for num in x) / N
 
-    # Calculate the sum of squares (S)
-    S = sum(x**2 for x in values) / N
-
-    # Calculate the variance
+    # Calculating the variance
     variance = S - meanVal**2
+
+    # Adjust for sample standard deviation if requested
+    if sample:
+        variance *= N / (N - 1)  # Use N-1 for sample variance
 
     # Calculate the standard deviation
     standardDev = sqrt(variance)
 
-    print(standardDev)
-
-    import numpy as np
-
-    # Calculate standard deviation
-    std_dev = np.std(values)
-
-    print("Standard Deviation:", std_dev)
+    return standardDev
 
 
+
+print("Standard Deviation using loops:", std_loops(values))
+print("Standard Deviation using built-in functions:", std_builtin(values))
+
+# Calculate standard deviation using NumPy
 import numpy as np
-
-# Calculate standard deviation
-std_dev = np.std(values)
-
-print("Standard Deviation:", std_dev)
-    
+print("Standard Deviation using NumPy:", np.std(values))
