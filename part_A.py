@@ -3,7 +3,7 @@ TECH2 mandatory assignment - Part A
 
 Write the implementation of part A of the exercise below.
 """
-values = [1, 2, 3, 4, 5, 3, 54, 64, 645]
+num_list = [1, 2, 3, 4, 5]
 
 def std_loops(x):
     """
@@ -84,9 +84,9 @@ def std_builtin(x, sample=False):
 
 
 
-print("Standard Deviation using loops:", std_loops(values))
-print("Standard Deviation using built-in functions:", std_builtin(values))
+print("Standard Deviation using loops:", std_loops(num_list))
+print("Standard Deviation using built-in functions:", std_builtin(num_list))
 
 # Calculate standard deviation using NumPy
 import numpy as np
-print("Standard Deviation using NumPy:", np.std(values))
+print("Standard Deviation using NumPy:", np.std(num_list))
